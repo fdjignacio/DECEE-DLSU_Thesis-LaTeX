@@ -40,5 +40,5 @@ jobs:
       - name: Upload compiled PDF
         uses: actions/upload-artifact@v7
         with:
-          name: AISL-1-2526-2-Implementation of a Blockchain-enabled OCR-processed Financial Record System with Smart Contract and Fraud Detection Feature #[Group ID]-[Thesis Title]
-          path: DLSUdtp_out/_LaTeX/AISL-1-2526-2-Implementation of a Blockchain-enabled OCR-processed Financial Record System with Smart Contract and Fraud Detection Feature.pdf #[Group ID]-[Thesis Title].pdf
+          name: Download Manuscript Here (Rename to [Group ID]-[Thesis Title].pdf)
+          path: DLSUdtp_out/_LaTeX/document.pdf

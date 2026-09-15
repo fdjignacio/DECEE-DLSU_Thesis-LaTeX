@@ -1,0 +1,44 @@
+name: Build LaTeX document
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build_latex:
+    name: Compile document.tex
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v4
+        with:
+          working_directory: DLSUdtp_out/_LaTeX
+          root_file: document.tex
+          compiler: pdflatex
+          pre_compile: |
+            touch theoretical_considerations.aux
+            touch design_considerations.aux
+            touch methodology.aux
+            touch results_and_discussions.aux
+            touch conclusions.aux
+            touch answers_to_questions.aux
+            touch revisions_to_the_proposal.aux
+            touch revisions_to_the_final.aux
+            touch usage_examples.aux
+            touch publication.aux
+            touch vita.aux
+          args: -file-line-error -halt-on-error -interaction=nonstopmode
+          post_compile: |
+            bibtex document
+            pdflatex -file-line-error -halt-on-error -interaction=nonstopmode document.tex
+            pdflatex -file-line-error -halt-on-error -interaction=nonstopmode document.tex
+
+      - name: Upload compiled PDF
+        uses: actions/upload-artifact@v7
+        with:
+          name: AISL-1-2526-2-Implementation of a Blockchain-enabled OCR-processed Financial Record System with Smart Contract and Fraud Detection Feature
+          path: DLSUdtp_out/_LaTeX/AISL-1-2526-2-Implementation of a Blockchain-enabled OCR-processed Financial Record System with Smart Contract and Fraud Detection Feature.pdf
